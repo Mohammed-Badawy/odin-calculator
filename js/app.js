@@ -25,8 +25,23 @@ function calculator()
             appendNumber(e.target.value);
         })
     })
+
+    // delete single number 
+    deleteBtn.addEventListener("click", removeNumber);
 }
 
+// remove single number
+function removeNumber()
+{
+    currentValue = currentValue.slice(0, currentValue.length -1);
+
+    if(currentValue.length < 1)
+    {
+        currentValue = "0";
+    }
+
+    screen.textContent = currentValue;
+}
 
 // append number function definition
 function appendNumber(num)
