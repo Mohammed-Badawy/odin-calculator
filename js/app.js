@@ -7,11 +7,54 @@ const deleteBtn = document.querySelector("#delete-btn");
 const signBtn = document.querySelector("#sign-btn");
 const percentBtn = document.querySelector("#percentage");
 
+// add some global variables
+const MAX_LENGTH = 10; // max digits on screen
+let previousValue = "";
+let currentValue = "";
+let operator = "";
 
 
+calculator();
+
+// define calculator function
+function calculator()
+{
+    // append number to screen
+    numberBtns.forEach(btn => {
+        btn.addEventListener("click", (e) => {
+            appendNumber(e.target.value);
+        })
+    })
+}
 
 
+// append number function definition
+function appendNumber(num)
+{
+    /*
+        check if the currentValue contains '.' and user input is '.'
+        don't add and return
+    */
+    if(currentValue.includes(".") && num === ".")
+    {
+        return;
+    }
 
+    // allow user to max input value
+    if(currentValue.length >= MAX_LENGTH)
+    {
+        return;
+    }
+
+    if(currentValue === "0")
+    {
+        currentValue = "";
+    }
+
+    currentValue += num;
+
+    screen.textContent = currentValue;
+}
 
 // add operate function
 function operate(num1, num2, oper)
