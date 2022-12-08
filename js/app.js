@@ -28,6 +28,19 @@ function calculator()
 
     // delete single number 
     deleteBtn.addEventListener("click", removeNumber);
+
+
+    // clear all values
+    clearBtn.addEventListener("click", clearAll);
+}
+
+// clear all function
+function clearAll()
+{
+    previousValue = "";
+    currentValue = "0";
+    operator = "";
+    screen.textContent = currentValue;
 }
 
 // remove single number
