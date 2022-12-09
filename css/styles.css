@@ -22,13 +22,14 @@
     flex-direction: column;
     justify-content: center;
     flex: 1;
-	
+	word-wrap: break-word;
 }
 
 .current-value {
 	color: #c3c4c7;
 	font-size: 2rem;
 	align-self: flex-end;
+	word-break: break-all;
 }
 
 .buttins-container {
