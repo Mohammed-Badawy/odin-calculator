@@ -50,7 +50,8 @@
 }
 
 .basic-btn:hover,
-#delete-btn:hover{
+#delete-btn:hover,
+#equal-btn:hover{
 	background-color: #f1f1f1;
 	color: #585858;
 	cursor: pointer;
