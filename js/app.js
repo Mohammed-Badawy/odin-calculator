@@ -9,7 +9,7 @@ const percentBtn = document.querySelector("#percentage");
 const equalBtn = document.querySelector("#equal-btn");
 
 // add some global variables
-const MAX_LENGTH = 10; // max digits on screen
+const MAX_LENGTH = 15; // max digits on screen
 let previousValue = "";
 let currentValue = "";
 let operator = "";
