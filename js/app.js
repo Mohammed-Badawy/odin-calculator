@@ -38,6 +38,33 @@ function calculator()
 
     // add percentage
     percentBtn.addEventListener("click", addPercentage);
+
+    // operators buttons functionality
+    operatorBtns.forEach(btn => {
+        btn.addEventListener("click", (e) => {
+        triggerOperation(e.target.value);
+        })
+    })
+}
+
+// trigger operation
+function triggerOperation(op)
+{
+    if(screen.textContent !== "0"){
+            currentValue = screen.textContent;
+        }
+        
+        if(!previousValue){
+            previousValue = Number(currentValue);
+            currentValue = "";
+        }
+        else{
+            let total = operate(previousValue, Number(currentValue), operator);
+            previousValue = total;
+            screen.textContent = previousValue;
+            currentValue = "";
+        }
+        operator = op;
 }
 
 // add percentage function
@@ -46,7 +73,8 @@ function addPercentage()
     if(previousValue)
     {
         let total = previousValue * (Number(currentValue) / 100);
-        previousValue = total;
+        previousValue = Math.round(total * 100) / 100;
+
     }
     else
     {
@@ -150,12 +178,8 @@ function operate(num1, num2, oper)
         {
             return sum;
         }
-        else
-        {
-            sum = Math.round(sum * 100) / 100; // round result to 2 decimals
-        }
     }
-
+    sum = Math.round(sum * 100) / 100; // round result to 2 decimals
     return sum;
 }
 
