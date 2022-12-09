@@ -32,6 +32,28 @@ function calculator()
 
     // clear all values
     clearBtn.addEventListener("click", clearAll);
+
+    // add sign button
+    signBtn.addEventListener("click", addSign);
+}
+
+// add sign
+function addSign()
+{
+    if(currentValue === "0")
+    {
+        return;
+    }
+    if(currentValue[0] === "-")
+    {
+    currentValue = currentValue.slice(1);
+    }
+    else
+    {
+    currentValue = `-${currentValue}`;
+    }
+
+    screen.textContent = currentValue;
 }
 
 // clear all function
