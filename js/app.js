@@ -6,6 +6,7 @@ const clearBtn = document.querySelector("#clear-btn");
 const deleteBtn = document.querySelector("#delete-btn");
 const signBtn = document.querySelector("#sign-btn");
 const percentBtn = document.querySelector("#percentage");
+const equalBtn = document.querySelector("#equal-btn");
 
 // add some global variables
 const MAX_LENGTH = 10; // max digits on screen
@@ -45,26 +46,45 @@ function calculator()
         triggerOperation(e.target.value);
         })
     })
+
+    // add equal button functionality
+    equalBtn.addEventListener("click", () => {
+        let total = operate(previousValue, Number(currentValue), operator);
+        screen.textContent = total.toString();
+        currentValue = "0";
+        previousValue = "";
+        operator = "";
+    })
 }
 
 // trigger operation
 function triggerOperation(op)
 {
-    if(screen.textContent !== "0"){
-            currentValue = screen.textContent;
-        }
+    if(screen.textContent === "Error")
+    {
+        currentValue = "0";
+        previousValue = "";
+        operator = "";
+        return;
+    }
+
+    if(screen.textContent !== "0")
+    {
+        currentValue = screen.textContent;
+    }
         
-        if(!previousValue){
-            previousValue = Number(currentValue);
-            currentValue = "";
-        }
-        else{
-            let total = operate(previousValue, Number(currentValue), operator);
-            previousValue = total;
-            screen.textContent = previousValue;
-            currentValue = "";
-        }
-        operator = op;
+    if(!previousValue){
+        previousValue = Number(currentValue);
+        currentValue = "0";
+    }
+    else
+    {
+        let total = operate(previousValue, Number(currentValue), operator);
+        previousValue = total;
+        screen.textContent = previousValue;
+        currentValue = "0";
+    }
+    operator = op;
 }
 
 // add percentage function
