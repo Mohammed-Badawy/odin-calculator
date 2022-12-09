@@ -50,10 +50,52 @@ function calculator()
     // add equal button functionality
     equalBtn.addEventListener("click", () => {
         let total = operate(previousValue, Number(currentValue), operator);
+        clearAll();
         screen.textContent = total.toString();
-        currentValue = "0";
-        previousValue = "";
-        operator = "";
+    })
+
+    // add keyboard functionality
+    window.addEventListener("keydown", (e) => {
+        const NUMS = "1234567890.";
+        const OPERATORS = "-+/*";
+        const EQUAL = ["Enter", "="];
+        const BACKSPACE = "Backspace";
+        const CLS = "Escape";
+        const PERCENT = "%";
+
+        if(NUMS.includes(e.key))
+        {
+            appendNumber(e.key);
+        }
+        else if(OPERATORS.includes(e.key))
+        {
+            triggerOperation(e.key);
+        }
+        else if(PERCENT.includes(e.key))
+        {
+            addPercentage();
+        }
+        else if(e.key === BACKSPACE)
+        {
+            removeNumber();
+        }
+        else if(e.key === CLS)
+        {
+            clearAll();
+        }
+        else if(EQUAL.includes(e.key))
+        {
+            if(currentValue === "0" && previousValue === ""){
+                return;
+            }
+            let total = operate(previousValue, Number(currentValue), operator);
+            clearAll();
+            screen.textContent = total;
+        }
+        else
+        {
+            e.preventDefault();
+        }
     })
 }
 
@@ -62,9 +104,7 @@ function triggerOperation(op)
 {
     if(screen.textContent === "Error")
     {
-        currentValue = "0";
-        previousValue = "";
-        operator = "";
+        clearAll();
         return;
     }
 
@@ -187,11 +227,11 @@ function operate(num1, num2, oper)
     {
         sum = subtract(num1, num2);
     }
-    else if(oper === "×")
+    else if(oper === "×" || oper === "*")
     {
         sum = multiply(num1, num2);
     }
-    else if(oper === "÷")
+    else if(oper === "÷" || oper === "/")
     {
         sum = divide(num1, num2);
         if(sum === "Error")
