@@ -35,6 +35,26 @@ function calculator()
 
     // add sign button
     signBtn.addEventListener("click", addSign);
+
+    // add percentage
+    percentBtn.addEventListener("click", addPercentage);
+}
+
+// add percentage function
+function addPercentage()
+{
+    if(previousValue)
+    {
+        let total = previousValue * (Number(currentValue) / 100);
+        previousValue = total;
+    }
+    else
+    {
+        previousValue = Number(currentValue) / 100;
+
+    }
+
+    screen.textContent = previousValue;
 }
 
 // add sign
